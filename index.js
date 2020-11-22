@@ -10,7 +10,7 @@ var students = require('./Routes/students');
 var professors = require('./Routes/professors');
 
 const auth = function(req, res, next) {
-    let exceptions = ['/login', '/register']; 
+    let exceptions = ['/login', '/register', '/list']; 
     if(exceptions.indexOf(req.url) >= 0) {
         next();
     } else {
