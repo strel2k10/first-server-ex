@@ -9,8 +9,15 @@ var users = require('./Routes/users');
 var students = require('./Routes/students');
 var professors = require('./Routes/professors');
 
+// SWAGGER
+
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require ("./swagger.json");
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {explorer: true}));
+
 const auth = function(req, res, next) {
-    let exceptions = ['/login', '/register', '/list']; 
+    let exceptions = ['/login', '/register', '/list', '/api-docs']; 
     if(exceptions.indexOf(req.url) >= 0) {
         next();
     } else {

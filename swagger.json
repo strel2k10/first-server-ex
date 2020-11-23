@@ -1,0 +1,412 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Pepega Clap",
+        "description": "Pepega Clap WR",
+        "version": "1.0"
+    },
+    "produces": ["application/json"],
+    "schemes": ["http"],
+    "components": {
+        "schemas": {
+            "Student": {
+                "type": "object",
+                "required": ["name", "age"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "interger"
+                    }
+                }
+            },
+            "Professor": {
+                "type": "object",
+                "required": ["name", "age"],
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "age": {
+                        "type": "interger"
+                    }
+                }
+            },
+            "User": {
+                "type": "object",
+                "required": ["username", "password"],
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    },
+    "paths": {
+        "/students": {
+            "get": {
+                "tags": ["Students"],
+                "description": "Get Students List",
+                "responses": {
+                    "200": {
+                        "description": "Students List",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Student"
+                                },
+                                "examples": {
+                                    "Students List": [{
+                                            "_id": "5fab2cad26b636225cab3e16",
+                                            "name": "Sofia",
+                                            "age": 20,
+                                            "__v": 0
+                                        },
+                                        {
+                                            "_id": "5fab302c5658053c348aebd6",
+                                            "name": "Gustavo",
+                                            "age": null,
+                                            "__v": 0
+                                        }
+                                    ]
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Invalid Token"
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            },
+            "post": {
+                "description": "Create Student",
+                "tags": ["Students"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/Student"
+                            },
+                            "examples": {
+                                "Student": {
+                                    "value": {
+                                        "name": "Zé Manel",
+                                        "age": 35
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Student",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": ""
+                                },
+                                "examples": {
+                                    "Student": {
+                                        "_id": "5fab2cad26b636225cab3e1f",
+                                        "name": "Rui",
+                                        "age": 25,
+                                        "__v": 0
+                                    }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Invalid Token"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "security": [{
+                        "bearer": []
+                    }]
+                }
+
+            }
+        },
+        "/students/{name}": {
+            "get": {
+                "tags": ["Students"],
+                "description": "Get Students Info By Name",
+                "parameters": [{
+                    "name": "name",
+                    "in": "path",
+                    "description": "Name of the student",
+                    "required": true,
+                    "scheme": {
+                        "type": "string"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Student Info",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#components/schemas/Student"
+                                },
+                                "examples": {
+                                    "Student": {
+                                        "_id": "5fab2cad26b636225cab3e1f",
+                                        "name": "Rui",
+                                        "age": 25,
+                                        "__v": 0
+                                    }
+                                }
+                            },
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Unauthorized": {
+                                        "value": "Invalid Token"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [{
+                    "bearer": []
+                }]
+            }
+        },
+        "/login": {
+            "post": {
+                "description": "Login",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/User"
+                            },
+                            "examples": {
+                                "User": {
+                                    "value": {
+                                        "username": "admin",
+                                        "password": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Success": {
+                                        "value": "Bearer Token"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/register": {
+            "post": {
+                "description": "Register",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#components/schemas/User"
+                            },
+                            "examples": {
+                                "User": {
+                                    "value": {
+                                        "username": "admin",
+                                        "password": "1234"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                }
+                            },
+                            "examples": {
+                                "Success": {
+                                    "value": "User created"
+                                }
+                            }
+                        }
+
+                    },
+                    "400": {
+                        "description": "Error",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Error"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "406": {
+                        "description": "Duplicated",
+                        "content": {
+                            "text/plain": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "Error": {
+                                        "value": "Duplicated user"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+}
