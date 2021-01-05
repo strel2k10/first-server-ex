@@ -25,12 +25,12 @@ const getStudentsByName = (req,res) => {
         if (err) {
             res.status(400).send(err);
         }
-        resizeTo.status(200).json(students);
+        res.status(200).json(students);
     })
 }
 
 const deleteStudentByName = (req, res) => {
-    Professor.deleteOne({name: req.params.name}, function (err, students) {
+    Student.deleteOne({name: req.params.name}, function (err, students) {
         if(err) {
             res.status(400).send(err);
         }

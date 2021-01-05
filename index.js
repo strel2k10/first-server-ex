@@ -1,5 +1,5 @@
 require('dotenv').config();
-const express = require('express'); 
+const express = require('express');
 const app = express();
 const port = 3000;
 const mongoose = require('mongoose');
@@ -32,7 +32,7 @@ const auth = function(req, res, next) {
 }
 
 app.use(express.json()); 
-app.use(auth);
+// app.use(auth);
 app.use('/', users);
 app.use('/students', students);
 app.use('/professors', professors);
